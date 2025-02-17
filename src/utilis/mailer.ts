@@ -41,8 +41,9 @@ export const sendEmail = async ({
       from: "pradeep@yadav.ai",
       to: email,
       subject:
-        emailType === "VERIFY" ? "verify your email" : "forgot your password",
-      html: "<b>Hello world?</b>", // html body
+        emailType === "VERIFY" ? "verify your email" : "Reset your password",
+      html: `<p> Click <a href="${process.env.DOMAIN}/verifyemail?token=${hashedToken}">here</a> to ${emailType === "VERIFY" ? "verify your email" : "Reset your password"} or copy and paste the link in your browser<br>
+      ${process.env.DOMAIN}/verifyemail?token=${hashedToken}</p>`,
     };
 
     const mailResponse = await transporter.sendMail(mailOptions);
